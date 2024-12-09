@@ -285,6 +285,10 @@ button:disabled {
   margin: 15px 0;
 }
 
+.cart .num {
+  margin-left: 15px;
+}
+
 .index h1 {
   color: var(--primary);
   font-family: var(--font);
