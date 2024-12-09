@@ -2,11 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { CartContext } from "./contexts";
 import Cart from "./Cart";
 import Pizza from "./Pizza";
-
-const intl = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
+import { getIntl } from "./utils";
 
 export default function Order() {
   const [pizzaType, setPizzaType] = useState("pepperoni");
@@ -35,7 +31,7 @@ export default function Order() {
   let price, selectedPizza;
   if (!loading) {
     selectedPizza = pizzaTypes.find((pizza) => pizzaType === pizza.id);
-    price = intl.format(
+    price = getIntl().format(
       selectedPizza.sizes ? selectedPizza.sizes[pizzaSize] : "",
     );
   }
@@ -58,12 +54,21 @@ export default function Order() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            const chosenPizaIndex = cart.findIndex(cartItem => cartItem.pizza.id === selectedPizza.id && cartItem.size === pizzaSize);
+            const chosenPizaIndex = cart.findIndex(
+              (cartItem) =>
+                cartItem.pizza.id === selectedPizza.id &&
+                cartItem.size === pizzaSize,
+            );
             const chosenPizas = [...cart];
             if (chosenPizaIndex !== -1) {
               chosenPizas[chosenPizaIndex].num++;
             } else {
-              chosenPizas.push({ pizza: selectedPizza, size: pizzaSize, price, num: 1 });
+              chosenPizas.push({
+                pizza: selectedPizza,
+                size: pizzaSize,
+                price,
+                num: 1,
+              });
             }
             setCart(chosenPizas);
           }}
