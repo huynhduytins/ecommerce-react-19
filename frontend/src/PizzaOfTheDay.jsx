@@ -1,4 +1,4 @@
-import { usePizzaOfTheDay } from "./usePizzaOfTheDay";
+import { usePizzaOfTheDay } from "./hook";
 import { getIntl } from "./utils";
 
 export default function PizzaOfTheDay() {

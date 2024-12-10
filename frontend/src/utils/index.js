@@ -1,4 +1,4 @@
-const getIntl = () => {
+export function getIntl () {
   const intl = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -6,5 +6,3 @@ const getIntl = () => {
 
   return intl;
 };
-
-export { getIntl };
